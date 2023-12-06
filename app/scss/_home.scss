@@ -8,7 +8,8 @@
   transition: all 0.3s ease-in-out;
 
   &.header-fixed {
-    background: #09223f;
+    background: rgba(9, 34, 63, 0.8);
+    backdrop-filter: blur(5px);
 
     .header-container {
       padding-top: 0;
