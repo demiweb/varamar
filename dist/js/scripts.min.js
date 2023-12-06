@@ -71,24 +71,41 @@ $(".header .menu > ul").append("<li id='magic-line'></li>");
 /* Cache it */
 var $magicLine = $("#magic-line");
 function magicLineFunc() {
-    if (document.querySelector('.header .current-menu-item')) {
-
+    if (document.querySelector('.header .menu > ul > .current-menu-item')) {
+        console.log('huita');
         if (window.innerWidth < 981) {
             $magicLine
-                .width($(".header .current-menu-item > a").width())
-                .height($(".header .current-menu-item > a").height())
-                .css("top", $(".header .current-menu-item > a").position().top)
+                .width($(".header .menu > ul > .current-menu-item > a").width())
+                .height($(".header .menu > ul > .current-menu-item > a").height())
+                .css("top", $(".header .menu > ul > .current-menu-item > a").position().top)
                 .data("origLeft", $magicLine.position().top)
                 .data("origWidth", $magicLine.width());
         } else {
             $magicLine
-                .width($(".header .current-menu-item > a").width())
-                .height($(".header .current-menu-item > a").height())
-                .css("left", $(".header .current-menu-item > a").position().left)
+                .width($(".header .menu > ul > .current-menu-item > a").width())
+                .height($(".header .menu > ul > .current-menu-item > a").height())
+                .css("left", $(".header .menu > ul > .current-menu-item > a").position().left)
                 .data("origLeft", $magicLine.position().left)
                 .data("origWidth", $magicLine.width());
         }
 
+    } else if (document.querySelector('.header .menu > ul > .current-menu-parent')) {
+        console.log('dsdsdsd');
+        if (window.innerWidth < 981) {
+            $magicLine
+                .width($(".header .menu > ul > .current-menu-parent > a").width())
+                .height($(".header .menu > ul > .current-menu-parent > a").height())
+                .css("top", $(".header .menu > ul > .current-menu-parent > a").position().top)
+                .data("origLeft", $magicLine.position().top)
+                .data("origWidth", $magicLine.width());
+        } else {
+            $magicLine
+                .width($(".header .menu > ul > .current-menu-parent > a").width())
+                .height($(".header .menu > ul > .current-menu-parent > a").height())
+                .css("left", $(".header .menu > ul > .current-menu-parent > a").position().left)
+                .data("origLeft", $magicLine.position().left)
+                .data("origWidth", $magicLine.width());
+        }
     } else {
         if (window.innerWidth < 981) {
             $magicLine
@@ -112,40 +129,26 @@ magicLineFunc();
 function lineHov() {
 
     if (window.innerWidth < 981) {
-        $(".header .menu ul > li")
 
-            .hover(
-                function() {
-                    $el = $(this).find('a');
-                    leftPos = $el.position().top;
-                    newWidth = $el.parent().width();
-
-                    $magicLine.stop().animate({
-                        top: leftPos,
-                        width: newWidth
-                    });
-                },
-                function() {
-                    $magicLine.stop().animate({
-                        top: $magicLine.data("origLeft"),
-                        width: $magicLine.data("origWidth")
-                    });
-                }
-            );
 
     } else {
-        $(".header .menu ul > li")
+        $(".header .menu > ul > li")
 
             .hover(
                 function() {
-                    $el = $(this).find('a');
-                    leftPos = $el.position().left;
-                    newWidth = $el.parent().width();
+                    if ($(this).hasClass('current-menu-parent')) {
 
-                    $magicLine.stop().animate({
-                        left: leftPos,
-                        width: newWidth
-                    });
+                    } else {
+                        $el = $(this).find('a');
+                        leftPos = $(this).position().left;
+                        newWidth = $(this).width();
+
+                        $magicLine.stop().animate({
+                            left: leftPos,
+                            width: newWidth
+                        });
+                    }
+
                 },
                 function() {
                     $magicLine.stop().animate({
@@ -202,7 +205,21 @@ window.onresize = () => {
 
 //rating
 
+let menuHasChild = [...document.querySelectorAll('.menu-item-has-children > a')];
 
+function controlMenuChild() {
+    if(menuHasChild.length) {
+        menuHasChild.forEach((btn) => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                btn.closest('li').classList.toggle('active');
+            })
+        })
+    }
+}
+controlMenuChild();
 
 
 

@@ -36,6 +36,12 @@
 }
 
 @media screen and (max-width: 1750px) {
+  .menu ul li.menu-item-has-children ul li a {
+    padding: 10px 15px;
+  }
+  .menu ul li.menu-item-has-children ul {
+    left: -15px;
+  }
   .cargo-text {
     padding: 10px 0 90px;
   }
@@ -49,8 +55,11 @@
     font-size: 110px;
     line-height: 1;
   }
+  .menu > ul {
+    gap: 30px;
+  }
   .menu ul li {
-    padding: 0 15px;
+    //padding: 0 15px;
   }
   .menu-btns {
     margin-left: 40px;
@@ -463,6 +472,12 @@
 }
 
 @media screen and (max-width: 1350px) {
+  .menu ul li.menu-item-has-children ul li a {
+    padding: 7px 13px;
+  }
+  .menu ul li.menu-item-has-children ul {
+    left: -13px;
+  }
   .agents-list {
     gap: 20px;
   }
@@ -535,8 +550,11 @@
   .hero-container h1 {
     font-size: 72px;
   }
+  .menu > ul {
+    gap: 26px;
+  }
   .menu ul li {
-    padding: 0 13px;
+    //padding: 0 13px;
   }
   .menu-btns {
     margin-left: 30px;
@@ -820,6 +838,64 @@
 }
 
 @media screen and (max-width: 980px) {
+  .menu {
+    ul {
+      li {
+        &.menu-item-has-children {
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          ul {
+            position: static;
+            border-left: 3px solid $red;
+            margin-left: -1px;
+            padding-left: 10px;
+            li {
+              a {
+                font-size: 16px;
+              }
+            }
+          }
+          &:hover {
+            position: static;
+            ul {
+              display: none;
+            }
+          }
+          > a {
+            position: relative;
+            width: 100%;
+            &::after, &::before {
+              width: 12px;
+              height: 2px;
+              background: #fff;
+              position: absolute;
+              right: 5px;
+              top: 50%;
+              display: inline-block;
+              content: '';
+              transform: translate(0, -50%);
+              transition: all 0.3s ease-in-out;
+            }
+            &::after {
+              transform: translate(0, -50%) rotate(-90deg);
+            }
+          }
+          &.active {
+            position: static;
+            > a {
+              &::after {
+                transform: translate(0, -50%);
+              }
+            }
+            ul {
+              display: flex !important;
+            }
+          }
+        }
+      }
+    }
+  }
   .modal-cont>p {
     font-size: 16px;
     line-height: 1.5;
@@ -878,13 +954,16 @@
     .menu {
       width: 100%;
       margin-bottom: 40px;
-
+      > ul {
+        gap: 0;
+      }
       ul {
         width: 100%;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         justify-content: flex-start;
+
 
         li {
           width: 100%;
@@ -1271,6 +1350,15 @@
 }
 
 @media screen and (max-width: 600px) {
+  .btn {
+    padding: 13px 9px;
+  }
+  .hidden-menu .menu-btns {
+    gap: 10px;
+    .btn {
+      flex-grow: 1;
+    }
+  }
   .services .cargo-list {
     flex-direction: column;
     align-items: flex-start;
@@ -1515,6 +1603,9 @@
 @media screen and (max-width: 500px) {
   .sub-title {
     font-size: 22px;
+  }
+  .footer-menu .menu> ul {
+    gap: 0;
   }
   .footer-menu .menu ul li {
     padding: 0;

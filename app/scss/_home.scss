@@ -72,7 +72,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-
+  > ul {
+    gap: 50px;
+  }
   ul {
     display: flex;
     align-items: center;
@@ -81,7 +83,54 @@ body {
 
     li {
       display: flex;
-      padding: 0 25px;
+      //padding: 0 25px;
+
+      &.menu-item-has-children {
+        ul {
+          position: absolute;
+          top: calc(100% - 1px);
+          left: -25px;
+          background: #09223f;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: flex-start;
+          gap: 0;
+          width: 250px;
+          display: none;
+          z-index: 4;
+
+          li {
+            width: 100%;
+            padding: 0;
+
+            a {
+              width: 100%;
+              padding: 12px 25px;
+              color: rgba(255, 255, 255, .5);
+
+              &:hover {
+                color: #fff;
+              }
+
+
+            }
+
+            &.current-menu-item {
+              a {
+                color: $red;
+              }
+            }
+          }
+        }
+
+        &:hover {
+          position: relative;
+
+          ul {
+            display: flex;
+          }
+        }
+      }
 
       &:first-child {
         padding-left: 0;
@@ -93,6 +142,7 @@ body {
 
       &#magic-line {
         padding: 0;
+        pointer-events: none;
       }
 
       a {
@@ -106,7 +156,7 @@ body {
         padding: 34px 0;
       }
 
-      &.current-menu-item, &:hover {
+      &.current-menu-item, &:hover, &.current-menu-parent {
         a {
           color: #fff;
         }
@@ -1817,6 +1867,7 @@ body {
     background: $red;
   }
 }
+
 .projects-texts {
   .btn-contact {
     top: 0px;
@@ -1826,11 +1877,13 @@ body {
     gap: 14px;
     padding-bottom: 0;
     padding-top: 70px;
+
     .ic {
       img {
         transform: rotate(-90deg);
       }
     }
+
     &::after {
       background: $btn-blue;
       bottom: 0;
@@ -1838,11 +1891,13 @@ body {
       height: 70px;
 
     }
+
     p {
       color: $btn-blue;
       margin: 0;
 
     }
+
     &:hover {
       .ic {
         transform: translate(0, -50%);
@@ -1850,6 +1905,7 @@ body {
     }
   }
 }
+
 .back-projects {
   position: absolute;
   display: flex;
@@ -2463,14 +2519,17 @@ body {
   transform: translate(0, 150%);
   transition: all 0.6s ease-in-out;
   transition-delay: 0s;
+
   iframe {
     width: 100%;
   }
 }
+
 .modal-window {
   &.visible {
     transform: translate(0, 0);
     transition-delay: 0s !important;
+
     .modal-container {
       transition-delay: 0.6s !important;
       transform: translate(0, 0);
@@ -2533,6 +2592,7 @@ body {
 
 .form {
   width: 100%;
+
   form {
     width: 100%;
     display: flex;
@@ -2542,6 +2602,7 @@ body {
     gap: 14px;
   }
 }
+
 .input-wrap {
   width: 100%;
 
@@ -2558,6 +2619,7 @@ body {
     border: none;
     border-bottom: 2px solid $brown;
     transition: all 0.3s ease-in-out;
+
     &::placeholder {
       color: rgba(13, 52, 97, 0.6);
       font-size: 17px;
@@ -2565,10 +2627,12 @@ body {
       font-weight: 400;
       line-height: 25px;
     }
+
     &:focus, &:active {
       border-bottom: 2px solid $btn-blue;
     }
   }
+
   textarea {
     min-height: 90px;
   }
