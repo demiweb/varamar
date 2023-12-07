@@ -2356,11 +2356,14 @@ body {
 
 .agents-list {
   width: 100%;
-  display: flex;
+  display: none;
   gap: 40px;
   align-items: stretch;
   justify-content: flex-start;
   flex-wrap: wrap;
+  &.active {
+    display: flex;
+  }
 }
 
 .agents {

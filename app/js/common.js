@@ -523,7 +523,9 @@ function changeTab() {
             let tabBtn = [...own.querySelectorAll('.tab-btn')];
 
             tabBtn.forEach((btn, k) => {
-                btn.addEventListener('click', () => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
                     if (btn.classList.contains('active')) {
                         btn.classList.remove('active');
                         btn.closest('.tabs-owner').querySelector('.item-tab.active').classList.remove('active');
@@ -547,7 +549,7 @@ function changeTab() {
 
                         if (window.innerWidth < 801) {
 
-                            if (btn.classList.contains('single-office-tab')) {
+                            if (btn.classList.contains('single-office-tab') || btn.closest('.projects-filter')) {
 
                             } else {
                                 $([document.documentElement, document.body]).animate({
